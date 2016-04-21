@@ -1,10 +1,14 @@
 package ru.mail.belyakovim.yandex_mobilization_2016;
 
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import ru.mail.belyakovim.yandex_mobilization_2016.databinding.MusicianItemBinding;
 
@@ -46,5 +50,10 @@ public class MusicianAdapter extends RecyclerView.Adapter<MusicianAdapter.Musici
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
         }
+    }
+
+    @BindingAdapter("bind:imageUrl")
+    public static void loadImage(ImageView imageView, String v) {
+        Picasso.with(imageView.getContext()).load(v).into(imageView);
     }
 }
