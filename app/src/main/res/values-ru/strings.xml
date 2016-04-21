@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Исполнители</string>
+    <string name="loading">Загрузка…</string>
+    <string name="internet_required">Требуется интернет соединение!</string>
+    <string name="albums">альбомов</string>
+    <string name="tracks">, песен</string>
+</resources>
