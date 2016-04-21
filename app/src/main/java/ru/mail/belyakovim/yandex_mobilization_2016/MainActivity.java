@@ -6,6 +6,8 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -21,14 +23,25 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MusiciansList  musiciansList;
+    private               RecyclerView  mRecyclerView;
+    private       RecyclerView.Adapter  mAdapter;
+    private RecyclerView.LayoutManager  mLayoutManager;
+    private              MusiciansList  mMusiciansList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        musiciansList = ((MobilizationApplication) getApplication()).getMusiciansList();
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mMusiciansList = ((MobilizationApplication) getApplication()).getMusiciansList();
+
+        mAdapter = new MusicianAdapter(mMusiciansList);
+        mRecyclerView.setAdapter(mAdapter);
 
         MusiciansListTask musiciansListTask = new MusiciansListTask();
         musiciansListTask.execute();
@@ -76,11 +89,24 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             dialog.dismiss();
+            mAdapter.notifyDataSetChanged();
             super.onPostExecute(aVoid);
         }
 
         private void fillMusicisnsList(String rawJSONData) {
+            try {
+                JSONArray musiciansArray = new JSONArray(rawJSONData);
 
+                for (int i = 0; i < musiciansArray.length(); i++) {
+                    Musician musician = MusicianBuilder.buildFromJSON(musiciansArray.getJSONObject(i));
+                    if (musician != null) {
+                        mMusiciansList.add(musician);
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         private void putDataToCache(String rawJSONData) {
