@@ -6,4 +6,5 @@
     <dimen name="text_padding">16dp</dimen>
     <dimen name="title_size">18sp</dimen>
     <dimen name="title_padding_vertical">14dp</dimen>
+    <dimen name="words_gap_size">5dp</dimen>
 </resources>

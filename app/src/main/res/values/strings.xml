@@ -2,4 +2,6 @@
     <string name="app_name">Musicians</string>
     <string name="loading">Loading…</string>
     <string name="internet_required">Internet connection is required!</string>
+    <string name="albums">albums</string>
+    <string name="tracks">, tracks</string>
 </resources>
