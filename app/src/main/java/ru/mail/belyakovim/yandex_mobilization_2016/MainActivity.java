@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +16,9 @@ import org.json.JSONException;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     public class MusiciansListTask extends AsyncTask<Void, Void, Void> {
 
+        private final String cache_filename = "raw_data_json.cache";
+
         protected ProgressDialog dialog;
 
         @Override
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 rawJSONData = getDataFromCache();
             }
             if (rawJSONData != null) {
-                fillMusicisnsList(rawJSONData);
+                fillMusiciansList(rawJSONData);
                 putDataToCache(rawJSONData);
             } else {
                 dialog.dismiss();
@@ -97,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
         }
 
-        private void fillMusicisnsList(String rawJSONData) {
+        private void fillMusiciansList(String rawJSONData) {
             try {
                 JSONArray musiciansArray = new JSONArray(rawJSONData);
 
@@ -114,10 +118,44 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void putDataToCache(String rawJSONData) {
-
+            FileOutputStream fos = null;
+            try {
+                if (!getCacheDir().exists()) {
+                    if (!getCacheDir().mkdirs()) {
+                        return;
+                    }
+                }
+                fos = openFileOutput(cache_filename, Context.MODE_PRIVATE);
+                fos.write(rawJSONData.getBytes());
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         private String getDataFromCache() {
+            FileInputStream fio = null;
+            String rawJSONData = null;
+            try {
+                fio = openFileInput(cache_filename);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fio));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String buff;
+                while (null != (buff = bufferedReader.readLine())) {
+                    stringBuilder.append(buff);
+                }
+
+                return stringBuilder.toString();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             return null;
         }
 
