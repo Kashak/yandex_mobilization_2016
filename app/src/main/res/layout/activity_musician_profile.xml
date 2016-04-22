@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="musician"
+            type="ru.mail.belyakovim.yandex_mobilization_2016.Musician" />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MusicianProfileActivity">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            app:imageUrl="@{musician.bigCoverURL}" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/item_padding"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/musician_genres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:paddingLeft="@dimen/text_padding"
+                android:paddingRight="@dimen/text_padding"
+                android:text='@{musician.genres != null ? TextUtils.join(", ", musician.genres) : ""}' />
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</layout>

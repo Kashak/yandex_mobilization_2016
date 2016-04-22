@@ -1,5 +1,7 @@
 package ru.mail.belyakovim.yandex_mobilization_2016;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +19,12 @@ import ru.mail.belyakovim.yandex_mobilization_2016.databinding.MusicianItemBindi
  */
 public class MusicianAdapter extends RecyclerView.Adapter<MusicianAdapter.MusicianItemViewHolder> {
 
-    private MusiciansList musiciansList;
+    private MusiciansList  musiciansList;
+    private  MainActivity  mainActivity;
 
-    public MusicianAdapter(MusiciansList musiciansList) {
+    public MusicianAdapter(MainActivity mainActivity, MusiciansList musiciansList) {
         this.musiciansList = musiciansList;
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -34,7 +38,7 @@ public class MusicianAdapter extends RecyclerView.Adapter<MusicianAdapter.Musici
     public void onBindViewHolder(MusicianItemViewHolder holder, int position) {
         Musician musician = musiciansList.getMusiciansListItem(position);
         holder.binding.setMusician(musician);
-
+        holder.binding.setHandler(new ClickHandler());
     }
 
     @Override
@@ -49,6 +53,21 @@ public class MusicianAdapter extends RecyclerView.Adapter<MusicianAdapter.Musici
         public MusicianItemViewHolder(View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
+        }
+    }
+
+    public class ClickHandler implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mainActivity, MusicianProfileActivity.class);
+
+            MusicianItemBinding binding = DataBindingUtil.getBinding(v);
+            int id = binding.getMusician().getId();
+
+            intent.putExtra(MobilizationApplication.MUSICIAN_ID, id);
+
+            mainActivity.startActivity(intent);
         }
     }
 

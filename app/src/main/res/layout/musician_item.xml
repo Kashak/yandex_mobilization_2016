@@ -4,13 +4,17 @@
     <data>
         <import type="android.text.TextUtils"/>
         <variable
+            name="handler"
+            type="ru.mail.belyakovim.yandex_mobilization_2016.MusicianAdapter.ClickHandler" />
+        <variable
             name="musician"
             type="ru.mail.belyakovim.yandex_mobilization_2016.Musician" />
     </data>
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="@{handler}">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/relativeLayout"

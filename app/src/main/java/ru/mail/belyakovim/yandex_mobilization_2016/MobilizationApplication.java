@@ -7,6 +7,8 @@ import android.app.Application;
  */
 public class MobilizationApplication extends Application {
 
+    public static final String MUSICIAN_ID = "id";
+
     private MusiciansList musiciansList = new MusiciansList();
 
     public static String getServerDataPath() {

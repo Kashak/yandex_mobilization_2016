@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         mMusiciansList = ((MobilizationApplication) getApplication()).getMusiciansList();
 
-        mAdapter = new MusicianAdapter(mMusiciansList);
+        mAdapter = new MusicianAdapter(this, mMusiciansList);
         mRecyclerView.setAdapter(mAdapter);
 
         MusiciansListTask musiciansListTask = new MusiciansListTask();

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class MusiciansList {
 
-    private static final String ILLEGAL_ARGUMENT = "QuestSpaceList: Illegal argument of list";
+    private static final String ILLEGAL_ARGUMENT = "MusiciansList: Illegal argument of list";
 
     private ArrayList<Musician> musicians = new ArrayList<Musician>();
 
@@ -17,6 +17,15 @@ public class MusiciansList {
         } else {
             return musicians.get(index);
         }
+    }
+
+    public final Musician find(int id) {
+        for (Musician musician : musicians ) {
+            if (musician.getId() == id) {
+                return musician;
+            }
+        }
+        return null;
     }
 
     public void add(Musician musician) {
