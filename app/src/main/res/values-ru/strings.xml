@@ -4,5 +4,6 @@
     <string name="loading">Загрузка…</string>
     <string name="internet_required">Требуется интернет соединение!</string>
     <string name="albums">альбомов</string>
-    <string name="tracks">, песен</string>
+    <string name="tracks">песен</string>
+    <string name="description_title">Биография</string>
 </resources>

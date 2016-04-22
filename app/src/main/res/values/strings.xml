@@ -3,5 +3,6 @@
     <string name="loading">Loading…</string>
     <string name="internet_required">Internet connection is required!</string>
     <string name="albums">albums</string>
-    <string name="tracks">, tracks</string>
+    <string name="tracks">tracks</string>
+    <string name="description_title">Biography</string>
 </resources>

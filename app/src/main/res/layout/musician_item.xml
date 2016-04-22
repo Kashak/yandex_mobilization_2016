@@ -41,7 +41,6 @@
                 android:layout_alignParentEnd="true"
                 android:textSize="@dimen/title_size"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
                 android:text="@{musician.name}" />
 
             <TextView
@@ -61,36 +60,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/text_padding"
-                android:text='@{String.format("%d", musician.albums)}'
+                android:text='@{String.format("%d %s, %d %s", musician.albums, @string/albums, musician.tracks, @string/tracks)}'
                 android:layout_alignBottom="@+id/imageView"
                 android:layout_toRightOf="@+id/imageView"
                 android:layout_toEndOf="@+id/imageView" />
-
-            <TextView
-                android:id="@+id/albums"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/words_gap_size"
-                android:layout_alignBottom="@+id/imageView"
-                android:layout_toRightOf="@+id/musician_albums_count"
-                android:text="@string/albums"/>
-
-            <TextView
-                android:id="@+id/musician_tracks_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/words_gap_size"
-                android:text='@{String.format("%d", musician.tracks)}'
-                android:layout_alignBottom="@+id/imageView"
-                android:layout_toRightOf="@+id/albums" />
-
-            <TextView
-                android:id="@+id/tracks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageView"
-                android:layout_toRightOf="@+id/musician_tracks_count"
-                android:text="@string/tracks"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
