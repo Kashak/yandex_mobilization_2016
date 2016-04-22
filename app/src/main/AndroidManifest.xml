@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MusicianProfileActivity"></activity>
+        <activity
+            android:name=".MusicianProfileActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

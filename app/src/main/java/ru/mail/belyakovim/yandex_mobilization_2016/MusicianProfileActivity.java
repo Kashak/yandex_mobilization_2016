@@ -19,5 +19,10 @@ public class MusicianProfileActivity extends AppCompatActivity {
 
         binding.setMusician(musician);
 
+        try {
+            getSupportActionBar().setTitle(musician != null ? musician.getName() : null);
+        } catch (NullPointerException e) {
+            e.getStackTrace();
+        }
     }
 }
